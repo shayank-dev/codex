@@ -1,19 +1,17 @@
-<!doctype html>
-<html>
-<head>
-  <title>Pigeon Marketplace</title>
-</head>
-<body>
-  <h1>Pigeon Marketplace</h1>
-  <a href="{{ url_for('add_pigeon') }}">Add a new pigeon</a>
-  <ul>
-    {% for pigeon in pigeons %}
-      <li>
-        <strong>{{ pigeon.name }}</strong> - {{ pigeon.description }} - ${{ pigeon.price }}
-      </li>
-    {% else %}
-      <li>No pigeons listed yet.</li>
-    {% endfor %}
-  </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Pigeon Marketplace{% endblock %}
+
+{% block content %}
+  {% if pigeons %}
+    <ul class="pigeons">
+      {% for pigeon in pigeons %}
+        <li class="pigeon-card">
+          <strong>{{ pigeon.name }}</strong> - {{ pigeon.description }} - ${{ pigeon.price }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No pigeons listed yet.</p>
+  {% endif %}
+{% endblock %}
