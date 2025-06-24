@@ -4,13 +4,30 @@
 
 {% block content %}
   {% if pigeons %}
-    <ul class="pigeons">
+    <div class="row g-4">
       {% for pigeon in pigeons %}
-        <li class="pigeon-card">
-          <strong>{{ pigeon.name }}</strong> - {{ pigeon.description }} - ${{ pigeon.price }}
-        </li>
+        <div class="col-md-4">
+          <div class="card h-100">
+            {% if pigeon.image %}
+              <img src="{{ url_for('static', filename='uploads/' ~ pigeon.image) }}" class="card-img-top" alt="{{ pigeon.name }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ pigeon.name }}</h5>
+              <p class="card-text">{{ pigeon.description }}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <span class="fw-bold">${{ '%.2f'|format(pigeon.price) }}</span>
+              <span>
+                <a href="{{ url_for('edit_pigeon', pigeon_id=pigeon.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                <form action="{{ url_for('delete_pigeon', pigeon_id=pigeon.id) }}" method="post" class="d-inline">
+                  <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this pigeon?');">Delete</button>
+                </form>
+              </span>
+            </div>
+          </div>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
   {% else %}
     <p>No pigeons listed yet.</p>
   {% endif %}

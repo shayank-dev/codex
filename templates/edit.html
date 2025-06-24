@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Pigeon{% endblock %}
+{% block title %}Edit Pigeon{% endblock %}
 
 {% block content %}
-  <h2 class="mb-4">Add a New Pigeon</h2>
+  <h2 class="mb-4">Edit {{ pigeon.name }}</h2>
   <form method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <div class="mb-3">
@@ -24,6 +24,9 @@
     <div class="mb-3">
       <label class="form-label" for="image">Image</label>
       <input class="form-control" type="file" name="image" id="image">
+      {% if pigeon.image %}
+        <img src="{{ url_for('static', filename='uploads/' ~ pigeon.image) }}" alt="{{ pigeon.name }}" class="img-thumbnail mt-2" style="max-height: 150px;">
+      {% endif %}
     </div>
     {{ form.submit(class="btn btn-primary") }}
   </form>
