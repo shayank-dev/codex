@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <title>Add Pigeon</title>
+</head>
+<body>
+  <h1>Add a New Pigeon</h1>
+  <form method="post">
+    <label>Name:<br>
+      <input type="text" name="name" required>
+    </label><br>
+    <label>Description:<br>
+      <textarea name="description" required></textarea>
+    </label><br>
+    <label>Price:<br>
+      <input type="number" step="0.01" name="price" required>
+    </label><br>
+    <button type="submit">Add Pigeon</button>
+  </form>
+  <p><a href="{{ url_for('index') }}">Back to listings</a></p>
+</body>
+</html>
